@@ -1,8 +1,8 @@
-package com.su.text.controller;
+package com.su.text.excel.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.gzhc365.common.utils.DateTool;
-import com.su.text.service.FinancialAuditService;
+import com.su.text.excel.service.FinancialAuditService;
 import com.su.text.util.ExcelUtil;
 import com.su.text.vo.FinancialAccountVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class TextController {
             param.put("startTime","2020-10-09");
             param.put("endTime","2020-10-09");
             param.put("total", String.valueOf(list.size()));
-            BigDecimal allFee = new BigDecimal("0.00");
+            BigDecimal allFee = new BigDecimal("0.0");
             List<String[]> contents = new ArrayList<>();
             String[] titles = new String[9];
             titles[0] = "序号";
@@ -55,7 +55,7 @@ public class TextController {
                 finance[2] = accountVo.getPayNo();
                 finance[3] = accountVo.getPaymentTime() == null ? "" : DateTool.getFullDateTime().format(accountVo.getPaymentTime());
                 BigDecimal fee = new BigDecimal(accountVo.getTotalFee());
-                fee = fee.divide(new BigDecimal("100.00"), 1, BigDecimal.ROUND_HALF_UP);
+                fee = fee.divide(new BigDecimal("100.0"), 1, BigDecimal.ROUND_HALF_UP);
                 finance[4] = fee.toString();
                 allFee = allFee.add(fee);
                 String payType = accountVo.getPayType();
